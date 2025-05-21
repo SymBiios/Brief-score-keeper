@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Score Keeper</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>
+          <span id="player1Score">0</span> to <span id="player2Score">0</span>
+        </h1>
+      </header>
+
+      <section class="game-controls">
+        <p>Playing to: <span id="playingTo">5</span></p>
+
+        <form class="score-form" aria-label="Score control form">
+          <label for="scoreLimit" class="visually-hidden">Score limit</label>
+          <input
+            type="number"
+            id="scoreLimit"
+            value="5"
+            min="1"
+            aria-label="Set score limit"
+          />
+
+          <div class="button-group">
+            <button type="button" id="playerOneBtn">Player One</button>
+            <button type="button" id="playerTwoBtn">Player Two</button>
+            <button type="reset" id="resetBtn">Reset</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
