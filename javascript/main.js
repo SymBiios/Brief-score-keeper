@@ -1,15 +1,6 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Éléments du DOM:");
-  console.log("player1Score:", document.getElementById("player1Score"));
-  console.log("player2Score:", document.getElementById("player2Score"));
-  console.log("playingTo:", document.getElementById("playingTo"));
-  console.log("scoreLimit:", document.getElementById("scoreLimit"));
-  console.log("playerOneBtn:", document.getElementById("playerOneBtn"));
-  console.log("playerTwoBtn:", document.getElementById("playerTwoBtn"));
-  console.log("resetBtn:", document.getElementById("resetBtn"));
-
   const player1ScoreElement = document.getElementById("player1Score");
   const player2ScoreElement = document.getElementById("player2Score");
   const pointsForVictory = document.getElementById("playingTo");
@@ -25,25 +16,50 @@ document.addEventListener("DOMContentLoaded", function () {
   function playerOneScore() {
     player1Score++;
     player1ScoreElement.textContent = player1Score;
+    whosWinning();
   }
 
   function playerTwoScore() {
     player2Score++;
     player2ScoreElement.textContent = player2Score;
+    whosWinning();
   }
 
   function resetParty() {
     player1ScoreElement.textContent = 0;
     player2ScoreElement.textContent = 0;
+    player1Score = 0;
+    player2Score = 0;
+    playerOneBtnIncrease.disabled = false;
+    playerTwoBtnIncrease.disabled = false;
+    pointsForVictory.textContent = 5;
   }
 
   function whosWinning() {
-    if (
-      player2Score <= scoreLimitInput.textContent ||
-      player1Score <= scoreLimitInput.textContent
-    ) {
+    if (player2Score >= victoryPoints || player1Score >= victoryPoints) {
+      playerOneBtnIncrease.disabled = true;
+      playerTwoBtnIncrease.disabled = true;
     }
   }
+
+  scoreLimitInput.addEventListener("change", function (event) {
+    let newValue = parseInt(this.value);
+
+    if (newValue < 1 || isNaN(newValue)) {
+      newValue = 5;
+      this.value = 5;
+    }
+
+    victoryPoints = parseInt(this.value);
+    pointsForVictory.textContent = parseInt(this.value);
+
+    player1ScoreElement.textContent = 0;
+    player2ScoreElement.textContent = 0;
+    player1Score = 0;
+    player2Score = 0;
+    playerOneBtnIncrease.disabled = false;
+    playerTwoBtnIncrease.disabled = false;
+  });
 
   playerOneBtnIncrease.addEventListener("click", playerOneScore);
   playerTwoBtnIncrease.addEventListener("click", playerTwoScore);
